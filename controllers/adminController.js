@@ -47,10 +47,13 @@ exports.updateEvent = async (req, res) => {
         new: true,
       }
     );
-
-    res
-      .status(200)
-      .json({ message: "Event updated successfully", updateEvent });
+    if (updateEvent) {
+      res
+        .status(200)
+        .json({ message: "Event updated successfully", updateEvent });
+    } else {
+      res.status(404).json({ message: "Event not found" });
+    }
   } catch (err) {
     res.status(500).json({ message: "Failed to update event", error: err });
   }
@@ -58,8 +61,12 @@ exports.updateEvent = async (req, res) => {
 
 exports.deleteEvent = async (req, res) => {
   try {
-    await eventsModel.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "Event deleted successfully" });
+    const deleteEvent = await eventsModel.findByIdAndDelete(req.params.id);
+    if (deleteEvent) {
+      res.status(200).json({ message: "Event deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Event not found" });
+    }
   } catch (err) {
     res.status(500).json({ message: "Failed to delete event", error: err });
   }
