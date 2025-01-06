@@ -1,5 +1,17 @@
 const mongoose = require("mongoose");
 
+const seatsSchema = new mongoose.Schema({
+  seatNumber: String,
+  isBooked: Boolean,
+  bookedById: {
+    type: String,
+    default: null,
+  },
+  bookedByUser: {
+    type: String,
+    default: null,
+  },
+});
 const eventsSchema = new mongoose.Schema(
   {
     name: String,
@@ -9,7 +21,7 @@ const eventsSchema = new mongoose.Schema(
     thumbnailImage: String,
     eventCategory: String,
     ticketPrice: Number,
-    seats: [],
+    seats: [seatsSchema],
     createdEvent: String,
     TicketStatus: String,
   },

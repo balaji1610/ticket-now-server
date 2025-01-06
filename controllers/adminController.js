@@ -63,3 +63,23 @@ exports.deleteEvent = async (req, res) => {
     res.status(500).json({ message: "Failed to delete event", error: err });
   }
 };
+
+//bookingTickest
+
+exports.bookingTickets = async (req, res) => {
+  try {
+    const { eventId, bookingSeats } = req.body;
+    const UpdateBookingSeat = await eventsModel.findByIdAndUpdate(
+      { _id: eventId },
+      { seats: bookingSeats },
+      { new: true }
+    );
+    res.status(200).json({
+      message: "Booked Ticket SucessFully",
+      result: UpdateBookingSeat,
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to delete event", error: err });
+  }
+};
+//cancleticket Pending

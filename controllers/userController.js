@@ -23,6 +23,7 @@ exports.createAccount = async (req, res) => {
       username: username,
       password: hashedPassword,
       createdAt: new Intl.DateTimeFormat("en-GB", options).format(date),
+      bookingDetails: [],
     };
 
     if (DuplicateUsername) {
@@ -75,4 +76,37 @@ exports.verifyToken = async (req, res) => {
 exports.logout = async (req, res) => {
   res.clearCookie("authToken");
   res.status(200).json({ message: "Logged out successfully" });
+};
+
+//booking
+exports.saveTicket = async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    const updatedUser = await userModel.findByIdAndUpdate(
+      userId,
+      { $push: { bookingDetails: req.body } },
+      { new: true }
+    );
+
+    res.status(200).json({ message: "Event booked successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to book event", error: err });
+  }
+};
+
+exports.cancleTicket = async (req, res) => {
+  try {
+    const { userId, eventId } = req.body;
+    const canCelTicket = await userModel.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { bookingDetails: { eventId: eventId } },
+      },
+      { new: true }
+    );
+    res.status(200).json({ message: "Ticket cancelled successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to cancel event", error: err });
+  }
 };
