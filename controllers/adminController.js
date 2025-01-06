@@ -29,14 +29,6 @@ exports.createEvent = async (req, res) => {
     res.status(500).json({ message: "Failed to create event", error: err });
   }
 };
-exports.getAllEvents = async (req, res) => {
-  try {
-    const allEvents = await eventsModel.find();
-    res.status(200).json(allEvents);
-  } catch (err) {
-    res.status(500).json({ message: "Failed to fetch events", error: err });
-  }
-};
 
 exports.updateEvent = async (req, res) => {
   try {

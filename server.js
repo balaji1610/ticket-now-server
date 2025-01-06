@@ -7,6 +7,7 @@ const cors = require("cors");
 //Routes
 const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
+const commonRoute = require("./routes/commonRoute");
 
 const app = express();
 app.use(express.json({ limit: "50mb" }));
@@ -26,5 +27,6 @@ mongoose
 
 app.use("", userRoute);
 app.use("/admin", adminRoute);
+app.use("/common", commonRoute);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
