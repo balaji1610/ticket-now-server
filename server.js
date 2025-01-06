@@ -1,9 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const cors = require("cors");
 
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 //Routes
 const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
@@ -11,7 +11,14 @@ const commonRoute = require("./routes/commonRoute");
 
 const app = express();
 app.use(express.json({ limit: "50mb" }));
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000", //frontend
+    credentials: true,
+  })
+);
+app.use(cookieParser());
 
 require("dotenv").config();
 
@@ -25,7 +32,10 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
-app.use("", userRoute);
+app.get("/", (req, res) => {
+  res.send("Server is Running..");
+});
+app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/common", commonRoute);
 
