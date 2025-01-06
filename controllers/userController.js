@@ -1,3 +1,4 @@
 exports.appRun = (req, res) => {
-  res.send("App is running..");
+  console.log("Server is Running..");
+  res.send("Server is Running..");
 };
