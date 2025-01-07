@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const collectionName = "events";
 const seatsSchema = new mongoose.Schema({
   seatNumber: String,
   isBooked: Boolean,
@@ -30,4 +30,4 @@ const eventsSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("events", eventsSchema);
+module.exports = mongoose.model(collectionName, eventsSchema);
