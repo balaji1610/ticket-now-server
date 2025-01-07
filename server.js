@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
+const serverless = require("serverless-http");
+const router = express.Router();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 //Routes
@@ -10,6 +12,7 @@ const adminRoute = require("./routes/adminRoute");
 const commonRoute = require("./routes/commonRoute");
 
 const app = express();
+
 app.use(express.json({ limit: "50mb" }));
 
 app.use(
@@ -38,5 +41,7 @@ app.get("/", (req, res) => {
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/common", commonRoute);
-
+app.use("'/.netlify/functions/'", router);
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+module.exports.handler = serverless(app);
