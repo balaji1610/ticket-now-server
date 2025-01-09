@@ -14,7 +14,7 @@ app.use(express.json({ limit: "50mb" }));
 
 app.use(
   cors({
-    origin: "http://localhost:3000", //frontend
+    origin: "https://ticket-now-user-login-ui-branch.onrender.com", //frontend
     credentials: true,
   })
 );
