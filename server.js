@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
-const cors = require("cors");
+// const cors = require("cors");
 const cookieParser = require("cookie-parser");
 //Routes
 const userRoute = require("./routes/userRoute");
@@ -12,12 +12,12 @@ const commonRoute = require("./routes/commonRoute");
 const app = express();
 app.use(express.json({ limit: "50mb" }));
 
-app.use(
-  cors({
-    origin: "https://ticket-now-user-login-ui-branch.onrender.com", //frontend
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000", //frontend
+//     credentials: true,
+//   })
+// );
 app.use(cookieParser());
 
 require("dotenv").config();
