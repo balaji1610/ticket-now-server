@@ -14,7 +14,7 @@ const seatsSchema = new mongoose.Schema({
 });
 const eventsSchema = new mongoose.Schema(
   {
-    name: String,
+    eventName: String,
     description: String,
     date: String,
     venue: String,
