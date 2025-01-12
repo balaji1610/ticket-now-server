@@ -68,10 +68,10 @@ exports.deleteEvent = async (req, res) => {
 
 exports.bookingTickets = async (req, res) => {
   try {
-    const { eventId, bookingSeats } = req.body;
+    const { _id, seats } = req.body;
     const UpdateBookingSeat = await eventsModel.findByIdAndUpdate(
-      { _id: eventId },
-      { seats: bookingSeats },
+      { _id: _id },
+      { seats: seats },
       { new: true }
     );
     res.status(200).json({
