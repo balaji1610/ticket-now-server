@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 const bookingDetailsSchema = new mongoose.Schema({
   userId: String,
-  numberOfTicket: Number,
-  totalPaid: Number,
   eventId: String,
+  numberOfTicket: Number,
+  ticketStaus: String,
+  BookingDate: String,
 });
 
 const userSchema = new mongoose.Schema(

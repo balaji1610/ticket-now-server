@@ -89,9 +89,9 @@ exports.saveTicket = async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json({ message: "Event booked successfully" });
+    res.status(200).json({ message: "Saved Ticket", result: updatedUser });
   } catch (err) {
-    res.status(500).json({ message: "Failed to book event", error: err });
+    res.status(500).json({ message: "Failed to Save Ticket", error: err });
   }
 };
 
